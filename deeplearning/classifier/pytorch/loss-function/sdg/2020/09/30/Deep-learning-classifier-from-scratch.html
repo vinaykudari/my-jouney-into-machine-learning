@@ -4,18 +4,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Vinay Kudari Blog | My Journey Into Machine Learning</title>
+<title>Deeplearning Classifier from Scratch | Vinay Kudari Blog</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Vinay Kudari Blog" />
+<meta property="og:title" content="Deeplearning Classifier from Scratch" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="My Journey Into Machine Learning" />
 <meta property="og:description" content="My Journey Into Machine Learning" />
-<link rel="canonical" href="https://vinaykudari.github.io/my-jouney-into-machine-learning/" />
-<meta property="og:url" content="https://vinaykudari.github.io/my-jouney-into-machine-learning/" />
+<link rel="canonical" href="https://vinaykudari.github.io/my-jouney-into-machine-learning/deeplearning/classifier/pytorch/loss-function/sdg/2020/09/30/Deep-learning-classifier-from-scratch.html" />
+<meta property="og:url" content="https://vinaykudari.github.io/my-jouney-into-machine-learning/deeplearning/classifier/pytorch/loss-function/sdg/2020/09/30/Deep-learning-classifier-from-scratch.html" />
 <meta property="og:site_name" content="Vinay Kudari Blog" />
-<meta property="og:image" content="https://vinaykudari.github.io/my-jouney-into-machine-learning/images/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-30T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"My Journey Into Machine Learning","url":"https://vinaykudari.github.io/my-jouney-into-machine-learning/","@type":"WebSite","headline":"Vinay Kudari Blog","image":"https://vinaykudari.github.io/my-jouney-into-machine-learning/images/logo.png","name":"Vinay Kudari Blog","@context":"https://schema.org"}</script>
+{"description":"My Journey Into Machine Learning","url":"https://vinaykudari.github.io/my-jouney-into-machine-learning/deeplearning/classifier/pytorch/loss-function/sdg/2020/09/30/Deep-learning-classifier-from-scratch.html","@type":"BlogPosting","headline":"Deeplearning Classifier from Scratch","dateModified":"2020-09-30T00:00:00-05:00","datePublished":"2020-09-30T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://vinaykudari.github.io/my-jouney-into-machine-learning/deeplearning/classifier/pytorch/loss-function/sdg/2020/09/30/Deep-learning-classifier-from-scratch.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/my-jouney-into-machine-learning/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://vinaykudari.github.io/my-jouney-into-machine-learning/feed.xml" title="Vinay Kudari | Blog" /><link rel="shortcut icon" type="image/x-icon" href="/my-jouney-into-machine-learning/images/favicon.ico"><link href="https://cdn.jsdelivr.net/npm/@primer/css/dist/primer.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css">
@@ -67,42 +68,88 @@ window.onload = wrap_img;
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home"><h1 id="welcome">Welcome!</h1>
-<p>Welcome to my blog! Here I will post about some of the things I’m working on that I feel are worth sharing to a wider audience, topics broadly within ML.</p>
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-<h1 id="posts">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Deeplearning Classifier from Scratch</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-09-30T00:00:00-05:00" itemprop="datePublished">
+        Sep 30, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
 
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/my-jouney-into-machine-learning/categories/#deeplearning">deeplearning</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/my-jouney-into-machine-learning/categories/#classifier">classifier</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/my-jouney-into-machine-learning/categories/#pytorch">pytorch</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/my-jouney-into-machine-learning/categories/#loss-function">loss-function</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/my-jouney-into-machine-learning/categories/#sdg">sdg</a>
+        
+      
+      </p>
+    
 
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
 
-  
-
-  <!-- Hide posts if front matter flag hide:true -->
-  
-  
-
-  <!-- Sort posts by rank, then date -->
-  
-  
-  
-
- 
-  
-
-   <!-- Assemble final sorted posts array -->
-  
-  <ul class="post-list"><li><h3>
-    <a class="post-link" href="/my-jouney-into-machine-learning/deeplearning/classifier/pytorch/loss-function/sdg/2020/09/30/Deep-learning-classifier-from-scratch.html">
-    Deeplearning Classifier from Scratch
+    <a href="https://github.com/vinaykudari/my-jouney-into-machine-learning/tree/master/_notebooks/2020-09-30-Deep-learning-classifier-from-scratch.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/my-jouney-into-machine-learning/assets/badges/github.svg" alt="View On GitHub">
     </a>
-</h3><p class="post-meta">Sep 30, 2020</p>
-</li><li><h3>
-    <a class="post-link" href="/my-jouney-into-machine-learning/markdown/2020/01/14/test-markdown-post.html">
-    An Example Markdown Post
-    </a>
-</h3><p class="post-meta-description">A minimal example of using markdown with fastpages.</p><p class="post-meta">Jan 14, 2020</p>
-</li></ul>
+</div>
 
-    </div>
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/vinaykudari/my-jouney-into-machine-learning/master?filepath=_notebooks%2F2020-09-30-Deep-learning-classifier-from-scratch.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/my-jouney-into-machine-learning/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/vinaykudari/my-jouney-into-machine-learning/blob/master/_notebooks/2020-09-30-Deep-learning-classifier-from-scratch.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/my-jouney-into-machine-learning/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-09-30-Deep-learning-classifier-from-scratch.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="vinaykudari/my-jouney-into-machine-learning"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/my-jouney-into-machine-learning/deeplearning/classifier/pytorch/loss-function/sdg/2020/09/30/Deep-learning-classifier-from-scratch.html" hidden></a>
+</article>
       </div>
     </main><footer class="site-footer h-card">
   <data class="u-url" href="/my-jouney-into-machine-learning/"></data>
