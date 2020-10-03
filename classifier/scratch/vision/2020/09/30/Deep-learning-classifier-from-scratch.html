@@ -4,19 +4,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Deeplearning Classifier from Scratch | Vinay Kudari Blog</title>
+<title>American sign language classifier from scratch | Vinay Kudari Blog</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Deeplearning Classifier from Scratch" />
+<meta property="og:title" content="American sign language classifier from scratch" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="My Journey Into Machine Learning" />
 <meta property="og:description" content="My Journey Into Machine Learning" />
-<link rel="canonical" href="https://vinaykudari.github.io/my-jouney-into-machine-learning/deeplearning/classifier/pytorch/loss-function/sdg/2020/09/30/Deep-learning-classifier-from-scratch.html" />
-<meta property="og:url" content="https://vinaykudari.github.io/my-jouney-into-machine-learning/deeplearning/classifier/pytorch/loss-function/sdg/2020/09/30/Deep-learning-classifier-from-scratch.html" />
+<link rel="canonical" href="https://vinaykudari.github.io/my-jouney-into-machine-learning/classifier/scratch/vision/2020/09/30/Deep-learning-classifier-from-scratch.html" />
+<meta property="og:url" content="https://vinaykudari.github.io/my-jouney-into-machine-learning/classifier/scratch/vision/2020/09/30/Deep-learning-classifier-from-scratch.html" />
 <meta property="og:site_name" content="Vinay Kudari Blog" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-09-30T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"My Journey Into Machine Learning","url":"https://vinaykudari.github.io/my-jouney-into-machine-learning/deeplearning/classifier/pytorch/loss-function/sdg/2020/09/30/Deep-learning-classifier-from-scratch.html","@type":"BlogPosting","headline":"Deeplearning Classifier from Scratch","dateModified":"2020-09-30T00:00:00-05:00","datePublished":"2020-09-30T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://vinaykudari.github.io/my-jouney-into-machine-learning/deeplearning/classifier/pytorch/loss-function/sdg/2020/09/30/Deep-learning-classifier-from-scratch.html"},"@context":"https://schema.org"}</script>
+{"description":"My Journey Into Machine Learning","url":"https://vinaykudari.github.io/my-jouney-into-machine-learning/classifier/scratch/vision/2020/09/30/Deep-learning-classifier-from-scratch.html","@type":"BlogPosting","headline":"American sign language classifier from scratch","dateModified":"2020-09-30T00:00:00-05:00","datePublished":"2020-09-30T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://vinaykudari.github.io/my-jouney-into-machine-learning/classifier/scratch/vision/2020/09/30/Deep-learning-classifier-from-scratch.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/my-jouney-into-machine-learning/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://vinaykudari.github.io/my-jouney-into-machine-learning/feed.xml" title="Vinay Kudari | Blog" /><link rel="shortcut icon" type="image/x-icon" href="/my-jouney-into-machine-learning/images/favicon.ico"><link href="https://cdn.jsdelivr.net/npm/@primer/css/dist/primer.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css">
@@ -71,7 +71,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Deeplearning Classifier from Scratch</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-09-30T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">American sign language classifier from scratch</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-09-30T00:00:00-05:00" itemprop="datePublished">
         Sep 30, 2020
       </time>
        • <span class="read-time" title="Estimated read time">
@@ -84,19 +84,13 @@ window.onload = wrap_img;
     
       <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
       
-        <a class="category-tags-link" href="/my-jouney-into-machine-learning/categories/#deeplearning">deeplearning</a>
-        &nbsp;
-      
         <a class="category-tags-link" href="/my-jouney-into-machine-learning/categories/#classifier">classifier</a>
         &nbsp;
       
-        <a class="category-tags-link" href="/my-jouney-into-machine-learning/categories/#pytorch">pytorch</a>
+        <a class="category-tags-link" href="/my-jouney-into-machine-learning/categories/#scratch">scratch</a>
         &nbsp;
       
-        <a class="category-tags-link" href="/my-jouney-into-machine-learning/categories/#loss-function">loss-function</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/my-jouney-into-machine-learning/categories/#sdg">sdg</a>
+        <a class="category-tags-link" href="/my-jouney-into-machine-learning/categories/#vision">vision</a>
         
       
       </p>
@@ -145,6 +139,7 @@ window.onload = wrap_img;
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.vision.all</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">fastbook</span> <span class="kn">import</span> <span class="n">plot_function</span>
 </pre></div>
 
     </div>
@@ -379,7 +374,7 @@ tensor([22])
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">image_tensors</span> <span class="o">=</span> <span class="n">get_image_tensors</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">image_tensors</span> <span class="o">=</span> <span class="n">get_image_tensors</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
 <span class="n">image_tensors</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">weights</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
@@ -395,7 +390,7 @@ tensor([22])
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(torch.Size([4595, 784]), torch.Size([784, 4]))</pre>
+<pre>(torch.Size([3676, 784]), torch.Size([784, 4]))</pre>
 </div>
 
 </div>
@@ -447,7 +442,7 @@ tensor([22])
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>torch.Size([4595, 4])</pre>
+<pre>torch.Size([3676, 4])</pre>
 </div>
 
 </div>
@@ -495,7 +490,7 @@ tensor([22])
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>tensor(0.2565)</pre>
+<pre>tensor(0.2557)</pre>
 </div>
 
 </div>
@@ -519,7 +514,10 @@ tensor([22])
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">predictions</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="n">get_labels</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+<span class="c1"># get each label class</span>
+<span class="n">target_classes</span> <span class="o">=</span> <span class="n">tensor</span><span class="p">([</span><span class="n">classes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">labels</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+<span class="n">target_classes</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -534,13 +532,7 @@ tensor([22])
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>tensor([[  1.1841,  -9.9513,  -4.5168,   9.9392],
-        [ -3.7422, -10.3497,  -8.8510,  13.2753],
-        [  3.4853, -21.8201,  -1.8672,  11.7336],
-        ...,
-        [  8.5336, -14.8239,  -0.5779,   7.2793],
-        [ -1.5427,  -8.7252,  -6.9455,   8.5687],
-        [  0.4978, -15.4843,   1.3328,   6.7999]], grad_fn=&lt;AddBackward0&gt;)</pre>
+<pre>tensor([2, 0, 3, 0, 3])</pre>
 </div>
 
 </div>
@@ -558,7 +550,13 @@ tensor([22])
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span><span class="o">/</span><span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># pytorch equivalent</span>
+<span class="n">activations_py</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">activations</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+
+<span class="n">activations</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">activations_py</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -573,14 +571,8 @@ tensor([22])
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>tensor([[1.5763e-04, 2.2993e-09, 5.2696e-07, 9.9984e-01],
-        [4.0681e-08, 5.4924e-11, 2.4584e-10, 1.0000e+00],
-        [2.6163e-04, 2.6772e-15, 1.2392e-06, 9.9974e-01],
-        ...,
-        [7.7797e-01, 5.5835e-11, 8.5879e-05, 2.2194e-01],
-        [4.0614e-05, 3.0857e-08, 1.8293e-07, 9.9996e-01],
-        [1.8216e-03, 2.0869e-10, 4.1983e-03, 9.9398e-01]],
-       grad_fn=&lt;SoftmaxBackward&gt;)</pre>
+<pre>(tensor([1.5480e-16, 1.2497e-05, 8.2206e-08, 9.9999e-01], grad_fn=&lt;SelectBackward&gt;),
+ tensor([1.5480e-16, 1.2497e-05, 8.2206e-08, 9.9999e-01], grad_fn=&lt;SelectBackward&gt;))</pre>
 </div>
 
 </div>
@@ -591,6 +583,143 @@ tensor([22])
 </div>
     
 
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">loss</span> <span class="o">=</span> <span class="n">activations</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">target_classes</span><span class="p">)),</span> <span class="n">target_classes</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="c1"># pytorch equivalent </span>
+<span class="n">loss_py</span> <span class="o">=</span> <span class="o">-</span><span class="n">F</span><span class="o">.</span><span class="n">nll_loss</span><span class="p">(</span><span class="n">activations</span><span class="p">,</span> <span class="n">target_classes</span><span class="p">)</span>
+
+<span class="n">loss</span><span class="p">,</span> <span class="n">loss_py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(tensor(0.2702, grad_fn=&lt;MeanBackward0&gt;),
+ tensor(0.2702, grad_fn=&lt;NegBackward&gt;))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">activations</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">activations</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(tensor([1.5480e-16, 1.2497e-05, 8.2206e-08, 9.9999e-01], grad_fn=&lt;SelectBackward&gt;),
+ tensor([-3.6404e+01, -1.1290e+01, -1.6314e+01, -1.2517e-05], grad_fn=&lt;LogBackward&gt;))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">cross_entropy_loss</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">target_classes</span><span class="p">):</span> 
+    <span class="n">activations</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+    <span class="n">activations_log</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">activations</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">activations_log</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">target_classes</span><span class="p">)),</span> <span class="n">target_classes</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">loss</span>
+<span class="c1"># pytorch equivalent</span>
+<span class="n">cross_entropy_loss_py</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">target_classes</span><span class="p">)</span>
+
+<span class="n">cross_entropy_loss</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">target_classes</span><span class="p">),</span> <span class="n">cross_entropy_loss_py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(tensor(18.2121, grad_fn=&lt;NegBackward&gt;),
+ tensor(18.2121, grad_fn=&lt;NllLossBackward&gt;))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Optimise-weights">Optimise weights<a class="anchor-link" href="#Optimise-weights"> </a></h3>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -603,7 +732,7 @@ tensor([22])
         theme="github-light"
         crossorigin="anonymous"
         async>
-</script><a class="u-url" href="/my-jouney-into-machine-learning/deeplearning/classifier/pytorch/loss-function/sdg/2020/09/30/Deep-learning-classifier-from-scratch.html" hidden></a>
+</script><a class="u-url" href="/my-jouney-into-machine-learning/classifier/scratch/vision/2020/09/30/Deep-learning-classifier-from-scratch.html" hidden></a>
 </article>
       </div>
     </main><footer class="site-footer h-card">
