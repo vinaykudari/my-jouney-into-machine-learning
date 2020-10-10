@@ -1,1 +1,1 @@
-Sitemap: https://vinaykudari.github.io/my-jouney-into-machine-learning/sitemap.xml
+Sitemap: https://vinaykudari.github.io/blog/sitemap.xml
