@@ -4,9 +4,9 @@
         "post0": {
             "title": "Title",
             "content": "import torch . Derivatives . def f(x): return (x)**2 + (3*x) . x1 = torch.tensor(2.).requires_grad_() y1 = f(x1) y1.backward() x1.grad . tensor(7.) .",
-            "url": "https://vinaykudari.github.io/my-jouney-into-machine-learning/2020/10/07/Basic-pytorch-functions.html",
-            "relUrl": "/2020/10/07/Basic-pytorch-functions.html",
-            "date": " • Oct 7, 2020"
+            "url": "https://vinaykudari.github.io/my-jouney-into-machine-learning/2020/10/09/Basic-pytorch-functions.html",
+            "relUrl": "/2020/10/09/Basic-pytorch-functions.html",
+            "date": " • Oct 9, 2020"
         }
         
     
