@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://vinaykudari.github.io/blog/markdown/2020/01/14/test-markdown-post.html</loc>
+<loc>https://vinaykudari.github.io/my-jouney-into-machine-learning/markdown/2020/01/14/test-markdown-post.html</loc>
 <lastmod>2020-01-14T00:00:00-06:00</lastmod>
 </url>
 <url>
-<loc>https://vinaykudari.github.io/blog/classifier/scratch/vision/2020/09/30/American-sign-language-classifier-from-scratch.html</loc>
+<loc>https://vinaykudari.github.io/my-jouney-into-machine-learning/classifier/scratch/vision/2020/09/30/American-sign-language-classifier-from-scratch.html</loc>
 <lastmod>2020-09-30T00:00:00-05:00</lastmod>
 </url>
 <url>
-<loc>https://vinaykudari.github.io/blog/2020/10/09/Basic-pytorch-functions.html</loc>
+<loc>https://vinaykudari.github.io/my-jouney-into-machine-learning/2020/10/09/Basic-pytorch-functions.html</loc>
 <lastmod>2020-10-09T00:00:00-05:00</lastmod>
 </url>
 <url>
-<loc>https://vinaykudari.github.io/blog/about/</loc>
+<loc>https://vinaykudari.github.io/my-jouney-into-machine-learning/about/</loc>
 </url>
 <url>
-<loc>https://vinaykudari.github.io/blog/</loc>
+<loc>https://vinaykudari.github.io/my-jouney-into-machine-learning/</loc>
 </url>
 <url>
-<loc>https://vinaykudari.github.io/blog/search/</loc>
+<loc>https://vinaykudari.github.io/my-jouney-into-machine-learning/search/</loc>
 </url>
 <url>
-<loc>https://vinaykudari.github.io/blog/categories/</loc>
+<loc>https://vinaykudari.github.io/my-jouney-into-machine-learning/categories/</loc>
 </url>
 </urlset>
