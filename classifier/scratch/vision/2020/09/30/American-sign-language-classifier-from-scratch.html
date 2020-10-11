@@ -4,9 +4,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>American sign language classifier from scratch | Vinay Kudari Blog</title>
+<title>American sign language classifier from scratch [99.63% accurate] | Vinay Kudari Blog</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="American sign language classifier from scratch" />
+<meta property="og:title" content="American sign language classifier from scratch [99.63% accurate]" />
 <meta name="author" content="Vinay Kudari" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="My Journey Into Machine Learning" />
@@ -18,7 +18,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-09-30T00:00:00-05:00" />
 <script type="application/ld+json">
-{"url":"https://vinaykudari.github.io/my-jouney-into-machine-learning/classifier/scratch/vision/2020/09/30/American-sign-language-classifier-from-scratch.html","@type":"BlogPosting","headline":"American sign language classifier from scratch","dateModified":"2020-09-30T00:00:00-05:00","datePublished":"2020-09-30T00:00:00-05:00","image":"https://vinaykudari.github.io/my-jouney-into-machine-learning/images/asl.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://vinaykudari.github.io/my-jouney-into-machine-learning/classifier/scratch/vision/2020/09/30/American-sign-language-classifier-from-scratch.html"},"author":{"@type":"Person","name":"Vinay Kudari"},"description":"My Journey Into Machine Learning","@context":"https://schema.org"}</script>
+{"url":"https://vinaykudari.github.io/my-jouney-into-machine-learning/classifier/scratch/vision/2020/09/30/American-sign-language-classifier-from-scratch.html","@type":"BlogPosting","headline":"American sign language classifier from scratch [99.63% accurate]","dateModified":"2020-09-30T00:00:00-05:00","datePublished":"2020-09-30T00:00:00-05:00","image":"https://vinaykudari.github.io/my-jouney-into-machine-learning/images/asl.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://vinaykudari.github.io/my-jouney-into-machine-learning/classifier/scratch/vision/2020/09/30/American-sign-language-classifier-from-scratch.html"},"author":{"@type":"Person","name":"Vinay Kudari"},"description":"My Journey Into Machine Learning","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/my-jouney-into-machine-learning/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://vinaykudari.github.io/my-jouney-into-machine-learning/feed.xml" title="Vinay Kudari | Blog" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -79,7 +79,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">American sign language classifier from scratch</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-09-30T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">American sign language classifier from scratch [99.63% accurate]</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-09-30T00:00:00-05:00" itemprop="datePublished">
         Sep 30, 2020
       </time>• 
           <span itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -87,7 +87,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      5 min read
+      7 min read
     
 </span></p>
 
@@ -168,7 +168,7 @@ window.onload = wrap_img;
 <p>Dataset: <a href="https://www.kaggle.com/datamunge/sign-language-mnist">Kaggle</a></p>
 <p>Benchmarks:</p>
 <ul>
-<li>~96% accuracy with one layer of parameters and no pre-processing</li>
+<li>~99.63% accuracy with one layer of parameters and no pre-processing</li>
 </ul>
 
 </div>
@@ -184,8 +184,8 @@ window.onload = wrap_img;
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.vision.all</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
-<span class="c1"># torch.cuda.set_device(0)</span>
-<span class="c1"># torch.set_default_tensor_type('torch.cuda.FloatTensor')</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">set_device</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">set_default_tensor_type</span><span class="p">(</span><span class="s1">'torch.cuda.FloatTensor'</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -312,8 +312,8 @@ window.onload = wrap_img;
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>tensor(3, device='cuda:0')
-tensor(6, device='cuda:0')
+<pre>tensor(3)
+tensor(6)
 </pre>
 </div>
 </div>
@@ -375,9 +375,29 @@ tensor(6, device='cuda:0')
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_random_weights</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">'cuda'</span><span class="p">)</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
+
+<span class="c1"># pytorch equivalent</span>
+<span class="n">parameters_py</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_df</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">parameters_py</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Linear(in_features=784, out_features=25, bias=True)</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -527,7 +547,7 @@ tensor(6, device='cuda:0')
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Accuracy with random weights</p>
+<p>Predictions with random weights are around ~5% accurate, lets try to optimise them</p>
 
 </div>
 </div>
@@ -547,7 +567,6 @@ tensor(6, device='cuda:0')
     <span class="k">return</span> <span class="p">(</span><span class="n">pred_classes</span> <span class="o">==</span> <span class="n">test_labels</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> 
 
 <span class="n">accuracy</span><span class="p">(</span><span class="n">valid_df</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
-<span class="c1"># Random weights are ~5% accurate</span>
 </pre></div>
 
     </div>
@@ -562,7 +581,7 @@ tensor(6, device='cuda:0')
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>tensor(0.0419, device='cuda:0')</pre>
+<pre>tensor(0.0406)</pre>
 </div>
 
 </div>
@@ -620,30 +639,9 @@ tensor(6, device='cuda:0')
 
 <span class="c1"># pytorch equivalent</span>
 <span class="n">activations_py</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">predictions</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">softmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">softmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">activations_py</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>(tensor(10.7700, device='cuda:0', grad_fn=&lt;SelectBackward&gt;),
- tensor(1.6697e-11, device='cuda:0', grad_fn=&lt;SelectBackward&gt;),
- tensor(-24.8158, device='cuda:0', grad_fn=&lt;SelectBackward&gt;),
- tensor(-24.8158, device='cuda:0', grad_fn=&lt;SelectBackward&gt;))</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -657,7 +655,8 @@ tensor(6, device='cuda:0')
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">loss_of_each_image</span> <span class="o">=</span> <span class="n">activations</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">activations</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">loss_of_each_image</span> <span class="o">=</span> <span class="n">activations</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 <span class="nb">max</span><span class="p">(</span><span class="n">loss_of_each_image</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">loss_of_each_image</span><span class="p">),</span> <span class="n">loss_of_each_image</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
@@ -673,8 +672,8 @@ tensor(6, device='cuda:0')
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(tensor([0.], device='cuda:0', grad_fn=&lt;SelectBackward&gt;),
- tensor([-inf], device='cuda:0', grad_fn=&lt;SelectBackward&gt;),
+<pre>(tensor([0.], grad_fn=&lt;SelectBackward&gt;),
+ tensor([-inf], grad_fn=&lt;SelectBackward&gt;),
  torch.Size([21964, 1]))</pre>
 </div>
 
@@ -689,7 +688,7 @@ tensor(6, device='cuda:0')
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There is a problem with applying log after softmax function, hence we use <code>F.log_softmax()</code> function provided by PyTorch</p>
+<p>We can observe a problem here, If we are taking log after softmax we get loss as infinity to avoid that we use <code>F.log_softmax()</code> function provided by PyTorch</p>
 
 </div>
 </div>
@@ -714,7 +713,7 @@ tensor(6, device='cuda:0')
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>&lt;ipython-input-47-6adc8555dfc7&gt;:1: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+<pre>&lt;ipython-input-22-6adc8555dfc7&gt;:1: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
   torch.log(F.softmax(tensor([62.0, -51.0]), dim=0)), F.log_softmax(tensor([62.0, -51.0]))
 </pre>
 </div>
@@ -739,11 +738,47 @@ tensor(6, device='cuda:0')
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We now have 25 probabilities corresponding to 25 categories for each image, we select the value according to it class it belongs and take the mean of all the values to calculate the loss</p>
+<p>We now have 25 probabilities corresponding to 25 categories for each image, we select the value according to it class it belongs and take the mean of all the training images to calculate the loss.</p>
 
 </div>
 </div>
 </div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">list_of_lists</span> <span class="o">=</span> <span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">list_of_lists</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([[1],
+        [5]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -771,8 +806,8 @@ tensor(6, device='cuda:0')
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(tensor(-37.4764, device='cuda:0', grad_fn=&lt;MeanBackward0&gt;),
- tensor(-37.4764, device='cuda:0', grad_fn=&lt;NegBackward&gt;))</pre>
+<pre>(tensor(-40.5223, grad_fn=&lt;MeanBackward0&gt;),
+ tensor(-40.5223, grad_fn=&lt;NegBackward&gt;))</pre>
 </div>
 
 </div>
@@ -813,8 +848,8 @@ tensor(6, device='cuda:0')
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(tensor(37.4764, device='cuda:0', grad_fn=&lt;NegBackward&gt;),
- tensor(37.4764, device='cuda:0', grad_fn=&lt;NllLossBackward&gt;))</pre>
+<pre>(tensor(40.5223, grad_fn=&lt;NegBackward&gt;),
+ tensor(40.5223, grad_fn=&lt;NllLossBackward&gt;))</pre>
 </div>
 
 </div>
@@ -841,7 +876,7 @@ tensor(6, device='cuda:0')
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train_epoch</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">accuracy_func</span><span class="p">,</span> <span class="n">valid_df</span><span class="p">,</span> <span class="n">epoch_no</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train_epoch</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">accuracy_func</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">,</span> <span class="n">valid_df</span><span class="p">,</span> <span class="n">epoch_no</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">image_tensors</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
         <span class="n">weights</span><span class="p">,</span> <span class="n">bias</span> <span class="o">=</span> <span class="n">parameters</span>
         <span class="n">preds</span> <span class="o">=</span> <span class="n">get_predictions</span><span class="p">(</span><span class="n">image_tensors</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">bias</span><span class="p">)</span>
@@ -877,50 +912,10 @@ tensor(6, device='cuda:0')
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">dl</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">get_dataset</span><span class="p">(</span><span class="n">train_df</span><span class="p">),</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
-        <span class="n">weights</span><span class="p">,</span> <span class="n">bias</span> <span class="o">=</span> <span class="n">train_epoch</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">,</span> <span class="n">valid_df</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">weights</span><span class="p">,</span> <span class="n">bias</span> <span class="o">=</span> <span class="n">train_epoch</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">,</span> <span class="n">cross_entropy_loss</span><span class="p">,</span> <span class="n">valid_df</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-</div>
-    
-
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>epoch=5; loss=2.197233200073242; accuracy=0.3982881009578705
-epoch=10; loss=2.051445722579956; accuracy=0.4283372759819031
-epoch=15; loss=1.9267258644104004; accuracy=0.45346930623054504
-epoch=20; loss=1.8183813095092773; accuracy=0.4744126498699188
-epoch=25; loss=1.7231673002243042; accuracy=0.4929885268211365
-epoch=30; loss=1.6387637853622437; accuracy=0.5155709385871887
-epoch=35; loss=1.5634348392486572; accuracy=0.5310508012771606
-epoch=40; loss=1.4958091974258423; accuracy=0.5439810752868652
-epoch=45; loss=1.4347560405731201; accuracy=0.5543616414070129
-epoch=50; loss=1.3793251514434814; accuracy=0.5654707551002502
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -947,16 +942,16 @@ epoch=50; loss=1.3793251514434814; accuracy=0.5654707551002502
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>epoch=5; loss=1.332802176475525; accuracy=0.5784010291099548
-epoch=10; loss=1.3075464963912964; accuracy=0.5838645100593567
-epoch=15; loss=1.2833633422851562; accuracy=0.5895100831985474
-epoch=20; loss=1.260180950164795; accuracy=0.5953378081321716
-epoch=25; loss=1.2379337549209595; accuracy=0.6015297770500183
-epoch=30; loss=1.2165626287460327; accuracy=0.6057184338569641
-epoch=35; loss=1.1960129737854004; accuracy=0.6106355786323547
-epoch=40; loss=1.1762347221374512; accuracy=0.6184665560722351
-epoch=45; loss=1.1571820974349976; accuracy=0.6224731206893921
-epoch=50; loss=1.1388126611709595; accuracy=0.6277545094490051
+<pre>epoch=5; loss=7.723250865936279; accuracy=0.05882352963089943
+epoch=10; loss=6.59684419631958; accuracy=0.07885631173849106
+epoch=15; loss=5.713827133178711; accuracy=0.10872336477041245
+epoch=20; loss=5.041042327880859; accuracy=0.13713349401950836
+epoch=25; loss=4.521183967590332; accuracy=0.1637224555015564
+epoch=30; loss=4.11172342300415; accuracy=0.18575851619243622
+epoch=35; loss=3.7844295501708984; accuracy=0.20961573719978333
+epoch=40; loss=3.5177741050720215; accuracy=0.23383718729019165
+epoch=45; loss=3.2960424423217773; accuracy=0.2586049735546112
+epoch=50; loss=3.108018636703491; accuracy=0.28337278962135315
 </pre>
 </div>
 </div>
@@ -970,7 +965,7 @@ epoch=50; loss=1.1388126611709595; accuracy=0.6277545094490051
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If the learning seems to be slow we can increase the learning rate</p>
+<p>We started with random parameters whos predictions are ~4% after training for 50 epochs I was able to achieve 28% accuracy, lets train for some more epochs</p>
 
 </div>
 </div>
@@ -982,7 +977,7 @@ epoch=50; loss=1.1388126611709595; accuracy=0.6277545094490051
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">3e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">2048</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -995,16 +990,160 @@ epoch=50; loss=1.1388126611709595; accuracy=0.6277545094490051
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>epoch=5; loss=1.210028886795044; accuracy=0.6099070906639099
-epoch=10; loss=1.389617681503296; accuracy=0.6073575019836426
-epoch=15; loss=1.1752502918243408; accuracy=0.6150063872337341
-epoch=20; loss=1.1438595056533813; accuracy=0.6357675790786743
-epoch=25; loss=1.0695892572402954; accuracy=0.6654525399208069
-epoch=30; loss=1.1350699663162231; accuracy=0.6567109823226929
-epoch=35; loss=1.1996654272079468; accuracy=0.6572573184967041
-epoch=40; loss=1.0542986392974854; accuracy=0.6873064637184143
-epoch=45; loss=0.891987144947052; accuracy=0.7131670117378235
-epoch=50; loss=0.9970915913581848; accuracy=0.689491868019104
+<pre>epoch=5; loss=2.7389485836029053; accuracy=0.3208887279033661
+epoch=10; loss=2.5074076652526855; accuracy=0.34984520077705383
+epoch=15; loss=2.3198177814483643; accuracy=0.38025858998298645
+epoch=20; loss=2.163520574569702; accuracy=0.4079402685165405
+epoch=25; loss=2.0304787158966064; accuracy=0.43398287892341614
+epoch=30; loss=1.9153084754943848; accuracy=0.45784008502960205
+epoch=35; loss=1.8142876625061035; accuracy=0.47532325983047485
+epoch=40; loss=1.7247360944747925; accuracy=0.49280640482902527
+epoch=45; loss=1.6446409225463867; accuracy=0.5070114731788635
+epoch=50; loss=1.5724561214447021; accuracy=0.520852267742157
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I'm trying to play with batch_size and learning rates to see how they effect the traning speed</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">2e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>epoch=5; loss=1.4595612287521362; accuracy=0.5585503578186035
+epoch=10; loss=1.2876158952713013; accuracy=0.6040793657302856
+epoch=15; loss=1.157658576965332; accuracy=0.6421416997909546
+epoch=20; loss=1.0544577836990356; accuracy=0.6709160208702087
+epoch=25; loss=0.9689654111862183; accuracy=0.6958659291267395
+epoch=30; loss=0.8959687352180481; accuracy=0.7175377607345581
+epoch=35; loss=0.8325452208518982; accuracy=0.741030752658844
+epoch=40; loss=0.7769091725349426; accuracy=0.7576033473014832
+epoch=45; loss=0.7277417778968811; accuracy=0.7723547220230103
+epoch=50; loss=0.6839793920516968; accuracy=0.788563072681427
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Bumping up the learning rate indeed improved the optimisation speed, let train for some more epochs</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">2e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>epoch=5; loss=0.6447545886039734; accuracy=0.8027681708335876
+epoch=10; loss=0.6093621253967285; accuracy=0.8149699568748474
+epoch=15; loss=0.577233076095581; accuracy=0.8229830265045166
+epoch=20; loss=0.5479092597961426; accuracy=0.8319067358970642
+epoch=25; loss=0.5210235714912415; accuracy=0.8402841091156006
+epoch=30; loss=0.49628016352653503; accuracy=0.8466581702232361
+epoch=35; loss=0.4734363555908203; accuracy=0.8553997278213501
+epoch=40; loss=0.45229026675224304; accuracy=0.8639591932296753
+epoch=45; loss=0.4326697885990143; accuracy=0.8721544146537781
+epoch=50; loss=0.4144253730773926; accuracy=0.880167543888092
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lets try with a larger batch size and learning rate, maybe it generalises well?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">3e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>epoch=5; loss=0.45226046442985535; accuracy=0.8226187825202942
+epoch=10; loss=0.41609740257263184; accuracy=0.8228009343147278
+epoch=15; loss=0.4397861361503601; accuracy=0.8209797739982605
+epoch=20; loss=0.4218664765357971; accuracy=0.827353835105896
+epoch=25; loss=0.42012253403663635; accuracy=0.8288107514381409
+epoch=30; loss=0.40878626704216003; accuracy=0.8324530720710754
+epoch=35; loss=0.3948947787284851; accuracy=0.8741576671600342
+epoch=40; loss=0.39441171288490295; accuracy=0.8421052694320679
+epoch=45; loss=0.3591289520263672; accuracy=0.8845382928848267
+epoch=50; loss=0.3269328773021698; accuracy=0.8943725824356079
 </pre>
 </div>
 </div>
@@ -1022,7 +1161,7 @@ epoch=50; loss=0.9970915913581848; accuracy=0.689491868019104
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">4e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">2e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1035,16 +1174,112 @@ epoch=50; loss=0.9970915913581848; accuracy=0.689491868019104
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>epoch=5; loss=0.5388020277023315; accuracy=0.8198870420455933
-epoch=10; loss=0.4986553192138672; accuracy=0.8228009343147278
-epoch=15; loss=0.4944797158241272; accuracy=0.8269895911216736
-epoch=20; loss=0.56035977602005; accuracy=0.7914769649505615
-epoch=25; loss=0.524692714214325; accuracy=0.801311194896698
-epoch=30; loss=0.40703633427619934; accuracy=0.8324530720710754
-epoch=35; loss=0.44167599081993103; accuracy=0.819340705871582
-epoch=40; loss=0.41297367215156555; accuracy=0.8442906141281128
-epoch=45; loss=0.4123932123184204; accuracy=0.8535785675048828
-epoch=50; loss=0.4013936519622803; accuracy=0.8594062924385071
+<pre>epoch=5; loss=0.2853115499019623; accuracy=0.9286104440689087
+epoch=10; loss=0.2771397829055786; accuracy=0.9318885207176208
+epoch=15; loss=0.26912689208984375; accuracy=0.9358950853347778
+epoch=20; loss=0.26137667894363403; accuracy=0.93917316198349
+epoch=25; loss=0.25392618775367737; accuracy=0.9429976344108582
+epoch=30; loss=0.2467852532863617; accuracy=0.9462757110595703
+epoch=35; loss=0.23995234072208405; accuracy=0.9501001238822937
+epoch=40; loss=0.2334199845790863; accuracy=0.9513749480247498
+epoch=45; loss=0.227177232503891; accuracy=0.9535603523254395
+epoch=50; loss=0.22121219336986542; accuracy=0.957202672958374
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we are now a bit above 95% accuracy, let try to take smaller steps to prevent overshooting</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>epoch=5; loss=0.21588782966136932; accuracy=0.9579311609268188
+epoch=10; loss=0.21408985555171967; accuracy=0.9582953453063965
+epoch=15; loss=0.21236322820186615; accuracy=0.9584774971008301
+epoch=20; loss=0.21069581806659698; accuracy=0.9588417410850525
+epoch=25; loss=0.20907911658287048; accuracy=0.9595701694488525
+epoch=30; loss=0.2075067162513733; accuracy=0.9595701694488525
+epoch=35; loss=0.20597346127033234; accuracy=0.9601165056228638
+epoch=40; loss=0.20447543263435364; accuracy=0.9610270857810974
+epoch=45; loss=0.20300959050655365; accuracy=0.9615734815597534
+epoch=50; loss=0.20157337188720703; accuracy=0.9623019099235535
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Can we get more out the single layer NN?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">2048</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>epoch=5; loss=0.20638421177864075; accuracy=0.9641230702400208
+epoch=10; loss=0.20571450889110565; accuracy=0.9641230702400208
+epoch=15; loss=0.20504949986934662; accuracy=0.9641230702400208
+epoch=20; loss=0.2043890506029129; accuracy=0.9646694660186768
+epoch=25; loss=0.20373308658599854; accuracy=0.9650336503982544
+epoch=30; loss=0.20308151841163635; accuracy=0.9653978943824768
+epoch=35; loss=0.20243410766124725; accuracy=0.9655800461769104
+epoch=40; loss=0.20179085433483124; accuracy=0.9655800461769104
+epoch=45; loss=0.2011517584323883; accuracy=0.965944230556488
+epoch=50; loss=0.2005166858434677; accuracy=0.965944230556488
 </pre>
 </div>
 </div>
@@ -1062,7 +1297,7 @@ epoch=50; loss=0.4013936519622803; accuracy=0.8594062924385071
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">4e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1075,16 +1310,145 @@ epoch=50; loss=0.4013936519622803; accuracy=0.8594062924385071
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>epoch=5; loss=0.3804209530353546; accuracy=0.8603168725967407
-epoch=10; loss=0.30301526188850403; accuracy=0.8767073154449463
-epoch=15; loss=0.34746670722961426; accuracy=0.8706974983215332
-epoch=20; loss=0.3037199378013611; accuracy=0.9082134366035461
-epoch=25; loss=0.26886311173439026; accuracy=0.8921871781349182
-epoch=30; loss=0.2956759035587311; accuracy=0.8892733454704285
-epoch=35; loss=0.3053615987300873; accuracy=0.8728829026222229
-epoch=40; loss=0.3092946410179138; accuracy=0.870879590511322
-epoch=45; loss=0.2900395691394806; accuracy=0.880167543888092
-epoch=50; loss=0.2876986861228943; accuracy=0.8807138800621033
+<pre>epoch=5; loss=0.21264278888702393; accuracy=0.9639409780502319
+epoch=10; loss=0.20781667530536652; accuracy=0.9661263823509216
+epoch=15; loss=0.2031080722808838; accuracy=0.9674012064933777
+epoch=20; loss=0.1985561102628708; accuracy=0.9688581228256226
+epoch=25; loss=0.19416968524456024; accuracy=0.9703150391578674
+epoch=30; loss=0.1899484097957611; accuracy=0.9723182916641235
+epoch=35; loss=0.1858879029750824; accuracy=0.9750500321388245
+epoch=40; loss=0.18198280036449432; accuracy=0.9768711924552917
+epoch=45; loss=0.17822673916816711; accuracy=0.9781460165977478
+epoch=50; loss=0.17461314797401428; accuracy=0.9797850847244263
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Seems to me that having lower batch size is better?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>epoch=5; loss=0.1711360067129135; accuracy=0.9810599088668823
+epoch=10; loss=0.16778911650180817; accuracy=0.9825168251991272
+epoch=15; loss=0.1645662933588028; accuracy=0.9836094975471497
+epoch=20; loss=0.1614619493484497; accuracy=0.9845200777053833
+epoch=25; loss=0.15847033262252808; accuracy=0.9852485656738281
+epoch=30; loss=0.1555863618850708; accuracy=0.9865233898162842
+epoch=35; loss=0.1528049111366272; accuracy=0.9872518181800842
+epoch=40; loss=0.15012092888355255; accuracy=0.9874339699745178
+epoch=45; loss=0.14753028750419617; accuracy=0.9885266423225403
+epoch=50; loss=0.14502808451652527; accuracy=0.9892551302909851
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I never assumed we could get 98.9% accurate model with just 1 layer, lets test the accuracy with test data</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">accuracy</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">bias</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor(0.9893)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>epoch=5; loss=0.14261044561862946; accuracy=0.9901657104492188
+epoch=10; loss=0.14027352631092072; accuracy=0.9905299544334412
+epoch=15; loss=0.13801345229148865; accuracy=0.9908941388130188
+epoch=20; loss=0.1358269453048706; accuracy=0.9910762906074524
+epoch=25; loss=0.13371039927005768; accuracy=0.9912583827972412
+epoch=30; loss=0.13166065514087677; accuracy=0.9914405345916748
+epoch=35; loss=0.12967489659786224; accuracy=0.9923511147499084
+epoch=40; loss=0.12775032222270966; accuracy=0.9925332069396973
+epoch=45; loss=0.12588419020175934; accuracy=0.9928974509239197
+epoch=50; loss=0.12407400459051132; accuracy=0.9938080310821533
 </pre>
 </div>
 </div>
@@ -1102,7 +1466,7 @@ epoch=50; loss=0.2876986861228943; accuracy=0.8807138800621033
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">4096</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">no_of_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1115,16 +1479,16 @@ epoch=50; loss=0.2876986861228943; accuracy=0.8807138800621033
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>epoch=5; loss=0.18215548992156982; accuracy=0.9544709324836731
-epoch=10; loss=0.18170930445194244; accuracy=0.9551994204521179
-epoch=15; loss=0.18126404285430908; accuracy=0.9555636048316956
-epoch=20; loss=0.18082618713378906; accuracy=0.9555636048316956
-epoch=25; loss=0.18039508163928986; accuracy=0.955927848815918
-epoch=30; loss=0.17997007071971893; accuracy=0.9562920928001404
-epoch=35; loss=0.17955094575881958; accuracy=0.9566563367843628
-epoch=40; loss=0.17913728952407837; accuracy=0.957202672958374
-epoch=45; loss=0.1787288933992386; accuracy=0.9575669169425964
-epoch=50; loss=0.17832538485527039; accuracy=0.9575669169425964
+<pre>epoch=5; loss=0.11372235417366028; accuracy=0.9952649474143982
+epoch=10; loss=0.11295342445373535; accuracy=0.9954470992088318
+epoch=15; loss=0.11219793558120728; accuracy=0.9956291913986206
+epoch=20; loss=0.11145418137311935; accuracy=0.9958112835884094
+epoch=25; loss=0.11072102189064026; accuracy=0.995993435382843
+epoch=30; loss=0.10999791324138641; accuracy=0.995993435382843
+epoch=35; loss=0.10928422957658768; accuracy=0.995993435382843
+epoch=40; loss=0.10857987403869629; accuracy=0.9961755275726318
+epoch=45; loss=0.10788467526435852; accuracy=0.9961755275726318
+epoch=50; loss=0.10719814896583557; accuracy=0.9963576793670654
 </pre>
 </div>
 </div>
@@ -1135,6 +1499,47 @@ epoch=50; loss=0.17832538485527039; accuracy=0.9575669169425964
 </div>
     
 
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">accuracy</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">bias</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor(0.9964)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Yea! its around 99.6% accurate. I still tried to train for more epochs but seemed to overfit (loss imporves but the accuracy decreases)</p>
+
+</div>
+</div>
+</div>
 </div>
 
 
